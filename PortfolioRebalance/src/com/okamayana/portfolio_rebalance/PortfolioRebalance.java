@@ -27,15 +27,26 @@ public class PortfolioRebalance {
 	}
 
 	private static String evaluate(Investment investment, double totalInvestment) {
-		String ticker = investment.getTicker();
 		double allocationTarget = investment.getAllocationTarget();
 		int sharesOwned = investment.getSharesOwned();
 		double sharePrice = investment.getSharePrice();
 
+		int sharesDiff = calculateSharesDiff(totalInvestment, allocationTarget,
+				sharesOwned, sharePrice);
+		
+		String ticker = investment.getTicker();
+		return generateAdvice(ticker, sharesDiff);
+	}
+
+	private static int calculateSharesDiff(double totalInvestment,
+			double allocationTarget, int sharesOwned, double sharePrice) {
 		int sharesNeeded = (int) Math.round((allocationTarget / 100)
 				* totalInvestment / sharePrice);
 		int sharesDiff = sharesOwned - sharesNeeded;
+		return sharesDiff;
+	}
 
+	private static String generateAdvice(String ticker, int sharesDiff) {
 		String advice = null;
 		if (sharesDiff < 0) {
 			advice = String.format(INSTRUCTION_BUY, Math.abs(sharesDiff),
@@ -43,7 +54,6 @@ public class PortfolioRebalance {
 		} else if (sharesDiff > 0) {
 			advice = String.format(INSTRUCTION_SELL, sharesDiff, ticker);
 		}
-
 		return advice;
 	}
 

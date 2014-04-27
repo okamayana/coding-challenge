@@ -65,7 +65,7 @@ public class TestRebalance {
 	@Test
 	public void checkRebalancedOutputIsAcceptable() {
 		Portfolio balancedPortfolio = PortfolioRebalance.rebalance(portfolio);
-
+		
 		List<Investment> investments = balancedPortfolio.getInvestments();
 		for (Investment investment : investments) {
 			String ticker = investment.getTicker();

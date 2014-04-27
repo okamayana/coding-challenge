@@ -16,7 +16,7 @@ import com.okamayana.portfolio_rebalance.util.PortfolioUtil;
 @RunWith(Parameterized.class)
 public class TestInputValidationAccept {
 
-	private static final String INPUT_PREFIX = "test_input_validation_accept_";
+	private static final String INPUT_PREFIX = "test_input_valid_";
 
 	private File input;
 

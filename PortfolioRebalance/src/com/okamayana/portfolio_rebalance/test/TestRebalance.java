@@ -24,7 +24,7 @@ import com.okamayana.portfolio_rebalance.util.PortfolioUtil;
 @RunWith(Parameterized.class)
 public class TestRebalance {
 
-	private static final String INPUT_PREFIX = "test_rebalance_";
+	private static final String INPUT_PREFIX = "test_input_valid_";
 
 	private File input;
 	private Portfolio portfolio;

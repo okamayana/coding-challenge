@@ -9,6 +9,10 @@ import java.util.List;
 
 public class Portfolio {
 
+	private static final double EPSILON = 0.00001;
+	private static final String ERROR_ALLOCATIONS_DO_NOT_ADD = "Percentages do not add to 100%";
+	private static final String ERROR_ACTUAL_CALCULATED_ALLOC = "Actual and calculated allocated percentages do not match for %s";
+
 	private List<Investment> investments = new ArrayList<Investment>();
 	private double totalInvestment;
 
@@ -32,10 +36,12 @@ public class Portfolio {
 	public void appendInvestment(Investment investment) {
 		investments.add(investment);
 	}
-	
+
 	public static Portfolio fromCsv(File csvFile) throws IOException {
 		BufferedReader reader = new BufferedReader(new FileReader(csvFile));
 		List<Investment> investments = new ArrayList<Investment>();
+		double totalPercentageTarget = 0;
+		double totalPercentageActual = 0;
 		double totalInvestment = 0;
 
 		for (String row; (row = reader.readLine()) != null;) {
@@ -53,10 +59,39 @@ public class Portfolio {
 			Investment investment = new Investment(ticker, allocationTarget,
 					allocationActual, sharesOwned, sharePrice);
 			investments.add(investment);
+
 			totalInvestment += sharePrice * sharesOwned;
+			totalPercentageTarget += allocationTarget;
+			totalPercentageActual += allocationActual;
 		}
 
 		reader.close();
+
+		validatePortfolio(investments, totalPercentageTarget,
+				totalPercentageActual, totalInvestment);
+
 		return new Portfolio(investments, totalInvestment);
+	}
+
+	private static void validatePortfolio(List<Investment> investments,
+			double totalPercentageTarget, double totalPercentageActual,
+			double totalInvestment) {
+		if (totalPercentageActual != 100.0d || totalPercentageTarget != 100.0d) {
+			throw new IllegalArgumentException(ERROR_ALLOCATIONS_DO_NOT_ADD);
+		}
+
+		for (Investment investment : investments) {
+			double sharePrice = investment.getSharePrice();
+			int shareOwned = investment.getSharesOwned();
+			double allocationActual = investment.getAllocationActual();
+			double allocationCalculated = sharePrice * shareOwned
+					/ totalInvestment * 100;
+			
+			if (Math.abs(allocationActual - allocationCalculated - 1.0) <= EPSILON) {
+				throw new IllegalArgumentException(
+						String.format(ERROR_ACTUAL_CALCULATED_ALLOC, 
+								investment.getTicker()));
+			}
+		}
 	}
 }

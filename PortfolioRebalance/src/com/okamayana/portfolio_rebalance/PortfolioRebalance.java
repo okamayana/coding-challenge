@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.okamayana.portfolio_rebalance.util.PortfolioUtil;
+
 public class PortfolioRebalance {
 
 	public static final String FILENAME = "input.csv";
@@ -66,6 +68,8 @@ public class PortfolioRebalance {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
+		PortfolioUtil.validate(portfolio);
 
 		List<String> advices = rebalance(portfolio);
 		for (String advice : advices) {

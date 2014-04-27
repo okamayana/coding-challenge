@@ -44,7 +44,7 @@ public class PortfolioUtil {
 		}
 	}
 
-	public static void printPortfolio(Portfolio portfolio) {
+	public static void print(Portfolio portfolio) {
 		List<Investment> investments = portfolio.getInvestments();
 		for (Investment investment : investments) {
 			String ticker = investment.getTicker();

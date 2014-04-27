@@ -16,33 +16,37 @@ import com.okamayana.portfolio_rebalance.test.util.TestUtil;
 import com.okamayana.portfolio_rebalance.util.PortfolioUtil;
 
 @RunWith(Parameterized.class)
-public class TestInputValidationReject {
+public class TestRebalance {
 
-	private static final String INPUT_PREFIX = "test_input_validation_reject_";
+	private static final String INPUT_PREFIX = "test_rebalance_";
 
 	private File input;
+	private Portfolio portfolio;
 	
 	@Rule
 	public ExpectedException thrown = ExpectedException.none();
 
-	public TestInputValidationReject(File input) {
+	public TestRebalance(File input, Portfolio portfolio) {
 		this.input = input;
+		this.portfolio = portfolio;
 	}
 
 	@Parameters
-	public static Collection<File[]> getParameters() {
-		return TestUtil.buildParameters(INPUT_PREFIX);
+	public static Collection<Object[]> getParameters() throws IOException {
+		return TestUtil.buildPortfolioParameters(INPUT_PREFIX);
 	}
 
 	@Test
-	public void invalidateInput() throws IOException {
-		Portfolio portfolio = Portfolio.fromCsv(input);
-
+	public void validateInput() throws IOException {
 		System.out.println(input.getName());
 		PortfolioUtil.print(portfolio);
 		System.out.println();
-		
-		thrown.expect(IllegalArgumentException.class);
+
 		PortfolioUtil.validate(portfolio);
+	}
+	
+	@Test
+	public void rebalance() {
+		
 	}
 }

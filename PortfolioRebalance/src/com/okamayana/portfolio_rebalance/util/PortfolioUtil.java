@@ -28,15 +28,15 @@ public class PortfolioUtil {
 			totalAllocationActual += allocationActual;
 			totalAllocationTarget += allocationTarget;
 
-			if (!MathUtil.areEqual(allocationActual, allocationCalculated)) {
+			if (!MathUtil.approxEqual(allocationActual, allocationCalculated)) {
 				throw new IllegalArgumentException(String.format(
 						ERROR_ACTUAL_CALCULATED_ALLOC, investment.getTicker(),
 						allocationActual, allocationCalculated));
 			}
 		}
 
-		if (!MathUtil.areEqual(totalAllocationActual, 100.0d)
-				|| !MathUtil.areEqual(totalAllocationTarget, 100.0d)) {
+		if (!MathUtil.approxEqual(totalAllocationActual, 100.0d)
+				|| !MathUtil.approxEqual(totalAllocationTarget, 100.0d)) {
 			throw new IllegalArgumentException(String.format(
 					ERROR_ALLOCATIONS_DO_NOT_ADD, totalAllocationActual,
 					totalAllocationTarget));

@@ -136,14 +136,17 @@ public class PortfolioRebalance {
 		System.out.println("unbalanced:");
 		PortfolioUtil.print(portfolio);
 		System.out.println();
-
+		
+		System.out.println("advice:");
 		List<String> advice = getAdvice(portfolio);
 		for (String clause : advice) {
 			if (clause != null) {
 				System.out.println(clause);
 			}
 		}
-
+		
+		System.out.println();
+		System.out.println("balanced:");
 		Portfolio rebalancedPortfolio = rebalance(portfolio);
 		PortfolioUtil.print(rebalancedPortfolio);
 	}

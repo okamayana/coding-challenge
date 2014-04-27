@@ -15,7 +15,7 @@ public class TestUtil {
 	public static final File BASE_PATH = new File(BASE_PATH_STRING);
 
 	public static final Collection<File[]> buildParameters(String prefix) {
-		List<File> inputs = Arrays.asList(TestUtil.BASE_PATH.listFiles());
+		List<File> inputs = getTestInputFiles();
 		List<File[]> parameters = new ArrayList<File[]>();
 
 		for (File input : inputs) {
@@ -30,7 +30,7 @@ public class TestUtil {
 
 	public static final Collection<Object[]> buildPortfolioParameters(
 			String prefix) throws IOException {
-		List<File> inputs = Arrays.asList(TestUtil.BASE_PATH.listFiles());
+		List<File> inputs = getTestInputFiles();
 		List<Object[]> parameters = new ArrayList<Object[]>();
 
 		for (File input : inputs) {
@@ -43,5 +43,13 @@ public class TestUtil {
 		}
 
 		return parameters;
+	}
+
+	private static List<File> getTestInputFiles() {
+		File[] files = BASE_PATH.listFiles();
+		Arrays.sort(files);
+		
+		List<File> inputs = Arrays.asList(files);
+		return inputs;
 	}
 }

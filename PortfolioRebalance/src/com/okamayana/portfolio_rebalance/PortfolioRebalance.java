@@ -43,6 +43,7 @@ public class PortfolioRebalance {
 		int sharesNeeded = (int) Math.round((allocationTarget / 100)
 				* totalInvestment / sharePrice);
 		int sharesDiff = sharesOwned - sharesNeeded;
+		
 		return sharesDiff;
 	}
 
@@ -54,6 +55,7 @@ public class PortfolioRebalance {
 		} else if (sharesDiff > 0) {
 			advice = String.format(INSTRUCTION_SELL, sharesDiff, ticker);
 		}
+		
 		return advice;
 	}
 

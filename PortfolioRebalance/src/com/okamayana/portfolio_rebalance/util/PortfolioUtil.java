@@ -7,6 +7,7 @@ import com.okamayana.portfolio_rebalance.Portfolio;
 
 public class PortfolioUtil {
 
+	private static final String FORMAT = "%s,%f,%f,%d,%f";
 	private static final String ERROR_ALLOCATIONS_DO_NOT_ADD = "Percentages do not add to 100%: %f, $f";
 	private static final String ERROR_ACTUAL_CALCULATED_ALLOC = "Actual and calculated allocated percentages do not match for %s: %f, %f";
 
@@ -40,6 +41,20 @@ public class PortfolioUtil {
 			throw new IllegalArgumentException(String.format(
 					ERROR_ALLOCATIONS_DO_NOT_ADD, totalAllocationActual,
 					totalAllocationTarget));
+		}
+	}
+
+	public static void printPortfolio(Portfolio portfolio) {
+		List<Investment> investments = portfolio.getInvestments();
+		for (Investment investment : investments) {
+			String ticker = investment.getTicker();
+			double allocationTarget = investment.getAllocationTarget();
+			double allocationActual = investment.getAllocationActual();
+			int sharesOwned = investment.getSharesOwned();
+			double sharePrice = investment.getSharePrice();
+
+			System.out.println(String.format(FORMAT, ticker, allocationTarget,
+					allocationActual, sharesOwned, sharePrice));
 		}
 	}
 }

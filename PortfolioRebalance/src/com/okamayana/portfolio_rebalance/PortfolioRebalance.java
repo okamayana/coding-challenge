@@ -25,6 +25,10 @@ public class PortfolioRebalance {
 
 		return advice;
 	}
+	
+	public static Portfolio rebalance(Portfolio portfolio) {
+		return rebalance(portfolio, getAdvice(portfolio));
+	}
 
 	public static Portfolio rebalance(Portfolio portfolio, List<String> advice) {
 		List<Investment> oldInvestments = portfolio.getInvestments();
@@ -140,9 +144,7 @@ public class PortfolioRebalance {
 			}
 		}
 
-		Portfolio rebalancedPortfolio = rebalance(portfolio, advice);
-		System.out.println();
-		System.out.println("balanced:");
+		Portfolio rebalancedPortfolio = rebalance(portfolio);
 		PortfolioUtil.print(rebalancedPortfolio);
 	}
 }

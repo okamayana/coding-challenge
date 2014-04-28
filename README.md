@@ -25,7 +25,7 @@ The following design decisions were made:
 
 * Use of `double` primitives instead of `BigDecimal` for decimal numbers.
 
- This is mainly because `BigDecimal`s may take a toll on performance and make it difficult for the program to scale as well as code/algorithm simplicity.
+ This is mainly because `BigDecimal`s may take a toll on performance, program scalability, and code complexity.
 
 * Use of approximate comparisons of decimal numbers, e.g. rounding of decimal numbers (to 2 decimal places by default) before doing comparisons on them.
 

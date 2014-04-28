@@ -2,11 +2,11 @@
 
 As outlined in the challenge's original README.md, this program takes a (possibly) unbalanced portfolio, and rebalances it such that each investment meets its given target allocation. 
 
-In addition, the program also validates the unbalanced portfolio input prior to processing, as well as the balanced output portfolio.
-
 ## Functionality
 
 The program takes a `*.csv` file which represents a user's portfolio. It then runs the algorithm on the portfolio, and prints a set of buy/sells needed for the portfolio to be balanced to the console. It also creates a new and balanced portfolio based on the set of buy/sells needed.
+
+In addition, the program also validates the unbalanced portfolio input prior to processing, as well as the balanced output portfolio.
 
 ### How to run
 
@@ -16,8 +16,6 @@ To use the program:
 2. Each line in the file is an investment, and should be in the following format: 
 	`ticker, target_allocation, actual_allocation, shares_owned, share_price`.
 3. Run the `PortfolioRebalance` class.`
- 
-### Algorithm
 
 ## Technical choices
 

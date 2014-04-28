@@ -25,7 +25,7 @@ The following design decisions were made:
 
 * Use of `double` primitives instead of `BigDecimal` for decimal numbers.
 
- This is mainly because `BigDecimal`s may take a toll on performance, program scalability, and code complexity.
+ This is mainly because `BigDecimal`s may take a toll on performance, program scalability, and code complexity.git
 
 * Use of approximate comparisons of decimal numbers, e.g. rounding of decimal numbers (to 2 decimal places by default) before doing comparisons on them.
 
@@ -37,6 +37,20 @@ Unit testing was done with JUnit 4 unit-test framework. The project's test code 
 
 * Input/output validation
 * Output acceptability
+
+### How to test
+
+To run tests:
+
+1. Add test input `*.csv` files into `$PROJECT_ROOT/test_inputs`:
+ * For valid test inputs, name the file in the following format: `test_input_valid_#` where `#` is the test number.
+ * For invalid test inputs, name the file in the following format: `test_input_invalid_#` where `#` is the test number.
+
+2. Run the appropriate test classes:
+ * For all test cases, run the `TestSuite` class.
+ * For input validation test cases, run the `TestInputValidationAccept` class.
+ * For input invalidation test cases, run the `TestInputValidationReject` class.
+ * For rebalancing test cases, run the class `TestRebalance` class.
 
 ### Testing choices
 
@@ -56,17 +70,3 @@ Output acceptability here is defined as whether or not the balanced portfolio ou
 * Ensure that the absolute errors between the output portfolio's investments' target and actual allocations are all within a constant and customizable sensitivity range (default is 2%). 
 
 Hence the program's acceptability be guaranteed to be within a sensitivity range, which can be easily adjusted based on the users' needs.
-
-### How to test
-
-To run tests:
-
-1. Add test input `*.csv` files into `$PROJECT_ROOT/test_inputs`:
- * For valid test inputs, name the file in the following format: `test_input_valid_#` where `#` is the test number.
- * For invalid test inputs, name the file in the following format: `test_input_invalid_#` where `#` is the test number.
-
-2. Run the appropriate test classes:
- * For all test cases, run the `TestSuite` class.
- * For input validation test cases, run the `TestInputValidationAccept` class.
- * For input invalidation test cases, run the `TestInputValidationReject` class.
- * For rebalancing test cases, run the class `TestRebalance` class.

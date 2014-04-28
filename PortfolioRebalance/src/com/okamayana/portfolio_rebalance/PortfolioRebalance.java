@@ -32,8 +32,45 @@ public class PortfolioRebalance {
 
 	public static Portfolio rebalance(Portfolio portfolio, List<String> advice) {
 		List<Investment> oldInvestments = portfolio.getInvestments();
-		List<Investment> newInvestments = new ArrayList<Investment>();
+		List<Investment> newInvestments = buildNewInvestmentsFromAdvice(advice, oldInvestments);
+		double newTotalInvestment = calculateTotalInvestment(newInvestments);
+		List<Investment> newNewInvestments = calculateActualAllocations(
+				newInvestments, newTotalInvestment);
 
+		return new Portfolio(newNewInvestments, newTotalInvestment);
+	}
+
+	private static List<Investment> calculateActualAllocations(
+			List<Investment> newInvestments, double newTotalInvestment) {
+		List<Investment> newNewInvestments = new ArrayList<Investment>();
+		for (Investment newInvestment : newInvestments) {
+			int sharesOwned = newInvestment.getSharesOwned();
+			double sharePrice = newInvestment.getSharePrice();
+			double newAllocationActual = sharesOwned * sharePrice
+					/ newTotalInvestment * 100.0d;
+			newAllocationActual = MathUtil.round(newAllocationActual, 2);
+
+			int index = newInvestments.indexOf(newInvestment);
+			newNewInvestments.add(index,
+					newInvestment.setAllocationActual(newAllocationActual));
+		}
+		return newNewInvestments;
+	}
+
+	private static double calculateTotalInvestment(List<Investment> investment) {
+		double newTotalInvestment = 0;
+		for (Investment newInvestment : investment) {
+			int sharesOwned = newInvestment.getSharesOwned();
+			double sharePrice = newInvestment.getSharePrice();
+			newTotalInvestment += sharesOwned * sharePrice;
+		}
+		return newTotalInvestment;
+	}
+
+	private static List<Investment> buildNewInvestmentsFromAdvice(List<String> advice,
+			List<Investment> oldInvestments) {
+		List<Investment> newInvestments = new ArrayList<Investment>();
+		
 		for (int i = 0; i < advice.size(); i++) {
 			String clause = advice.get(i);
 
@@ -67,28 +104,8 @@ public class PortfolioRebalance {
 
 			newInvestments.add(newInvestment);
 		}
-
-		double newTotalInvestment = 0;
-		for (Investment newInvestment : newInvestments) {
-			int sharesOwned = newInvestment.getSharesOwned();
-			double sharePrice = newInvestment.getSharePrice();
-			newTotalInvestment += sharesOwned * sharePrice;
-		}
-
-		List<Investment> newNewInvestments = new ArrayList<Investment>();
-		for (Investment newInvestment : newInvestments) {
-			int sharesOwned = newInvestment.getSharesOwned();
-			double sharePrice = newInvestment.getSharePrice();
-			double newAllocationActual = sharesOwned * sharePrice
-					/ newTotalInvestment * 100.0d;
-			newAllocationActual = MathUtil.round(newAllocationActual, 2);
-
-			int index = newInvestments.indexOf(newInvestment);
-			newNewInvestments.add(index,
-					newInvestment.setAllocationActual(newAllocationActual));
-		}
-
-		return new Portfolio(newNewInvestments, newTotalInvestment);
+		
+		return newInvestments;
 	}
 
 	private static String evaluate(Investment investment, double totalInvestment) {

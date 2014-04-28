@@ -23,17 +23,23 @@ To use the program:
 
 The following design decisions were made:
 
-* Use of `double` primitives instead of `BigDecimal` for decimal numbers.
+* Use of `double` primitives instead of `BigDecimal` objects for decimal numbers.
 
- This is mainly because `BigDecimal`s may take a toll on performance, program scalability, and code complexity.git
+ This is mainly because `BigDecimal`s may take a toll on performance, program scalability, and code complexity.
 
 * Use of approximate comparisons of decimal numbers, e.g. rounding of decimal numbers (to 2 decimal places by default) before doing comparisons on them.
 
  This is again partly to avoid the use of `BigDecimal` in calculations, while at the same time still a reliable and simple alternative.
+ 
+* Input-based testing; test classes take `*.csv` files (representing input portfolios) and tests the program using them as inputs.
+
+ This makes it easier to test different aspects of the program, since the input to the tests are separate from the test code.
 
 ## Testing
 
-Unit testing was done with JUnit 4 unit-test framework. The project's test code mostly cover the following issues:
+Unit testing was done with JUnit 4 unit-test framework. The tests are designed such that users are able to easily create their own test `*.csv` inputs (in the form of portfolios) and run them.
+
+The project's test code mostly cover the following issues:
 
 * Input/output validation
 * Output acceptability

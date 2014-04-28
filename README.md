@@ -13,8 +13,10 @@ In addition, the program also validates the unbalanced portfolio input prior to 
 To use the program:
 
 1. Edit the file `input.csv`, located in the Eclipse project's root directory.
-2. Each line in the file is an investment, and should be in the following format: 
-	`ticker, target_allocation, actual_allocation, shares_owned, share_price`.
+2. Each line in the file is an investment, and should be in the following format:
+
+ `ticker, target_allocation, actual_allocation, shares_owned, share_price`.
+ 
 3. Run the `PortfolioRebalance` class.`
 
 ## Technical choices
@@ -25,9 +27,11 @@ Unit testing was done with JUnit 4 unit-test framework. The project's test code 
 
 * Input validation
 * Output validation
-* Whether the balanced portfolio's allocations are within acceptable range of the target allocations.
+* Output acceptability
 
 ### Testing choices
+
+####
 
 ### How to test
 

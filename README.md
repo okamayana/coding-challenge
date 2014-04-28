@@ -26,6 +26,8 @@ Unit testing was done with JUnit 4 unit-test framework. The project's test code 
 * Output validation
 * Whether the balanced portfolio's allocations are within acceptable range of the target allocations.
 
+### Testing choices
+
 ### How to test
 
 To run tests:

@@ -104,7 +104,7 @@ public class PortfolioRebalance {
 		int sharesOwned = investment.getSharesOwned();
 		double sharePrice = investment.getSharePrice();
 
-		int sharesNeeded = (int) Math.round((allocationTarget / 100)
+		int sharesNeeded = (int) Math.round((allocationTarget / 100.0)
 				* totalInvestment / sharePrice);
 		int sharesDiff = sharesOwned - sharesNeeded;
 

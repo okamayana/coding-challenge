@@ -73,6 +73,6 @@ By covering the aforementioned points, the program can safely assume that its in
 
 Output acceptability here is defined as whether or not the balanced portfolio outputs' actual allocations are within acceptable range of the target allocations. To ensure high acceptability of outputs, the tests cover the following points:
 
-* Ensure that the absolute errors between the output portfolio's investments' target and actual allocations are all within a constant and customizable sensitivity range (default is 2%). 
+* Ensure that the absolute errors between each investment's target and actual allocation are all within a constant and customizable sensitivity range (default is 2%). 
 
-Hence the program's acceptability be guaranteed to be within a sensitivity range, which can be easily adjusted based on the users' needs.
+Hence the program's acceptability can be guaranteed to be within a sensitivity range, which can be easily adjusted based on the users' needs.

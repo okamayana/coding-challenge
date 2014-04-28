@@ -21,6 +21,16 @@ To use the program:
 
 ## Technical choices
 
+The following design decisions were made:
+
+* Use of `double` primitives instead of `BigDecimal` for decimal numbers.
+
+ This is mainly because `BigDecimal`s may take a toll on performance and make it difficult for the program to scale as well as code/algorithm simplicity.
+
+* Use of approximate comparisons of decimal numbers, e.g. rounding of decimal numbers (to 2 decimal places by default) before doing comparisons on them.
+
+ This is again partly to avoid the use of `BigDecimal` in calculations, while at the same time still a reliable and simple alternative.
+
 ## Testing
 
 Unit testing was done with JUnit 4 unit-test framework. The project's test code mostly cover the following issues:

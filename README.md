@@ -25,13 +25,27 @@ To use the program:
 
 Unit testing was done with JUnit 4 unit-test framework. The project's test code mostly cover the following issues:
 
-* Input validation
-* Output validation
+* Input/output validation
 * Output acceptability
 
 ### Testing choices
 
-####
+#### Input/output validation
+
+Input/output validation was done to ensure inputs' data are reliable before processing them, and that the outputs are correct (which does not cover their acceptability). The tests mostly cover the following points:
+
+* Ensure all given target and actual allocation values add up to 100%
+* Ensure each investment's given actual allocation is correct, calculated based on each given share price, share count, and total investment.
+
+By covering the aforementioned points, the program can safely assume that its inputs/outputs have reliable and mathematically correct information.
+
+#### Output acceptability
+
+Output acceptability here is defined as whether or not the balanced portfolio outputs' actual allocations are within acceptable range of the target allocations. To ensure high acceptability of outputs, the tests cover the following points:
+
+* Ensure that the absolute errors between the output portfolio's investments' target and actual allocations are all within a constant and customizable sensitivity range (default is 2%). 
+
+Hence the program's acceptability be guaranteed to be within a sensitivity range, which can be easily adjusted based on the users' needs.
 
 ### How to test
 
